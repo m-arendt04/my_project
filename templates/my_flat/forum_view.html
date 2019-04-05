@@ -1,0 +1,27 @@
+{% extends "my_flat/index.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div>
+        <h2>{{ user.username }}</h2>
+        <a href="/forum/new_post">Nowy post</a>
+    </div>
+    <div class="content-section div_form">
+        <article class="media content_section">
+            <div class="media-body">
+{#            Dodaj przyciska kasowania i edytopwania tylko dla zalogowanego użytkownika#}
+                {% for post in posts %}
+                    <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ post.author }}</a>
+                    <small class="text-muted">{{ post.date_posted|date:"F d, Y, H:m" }}</small>
+                    {% if post.author == user %} {# If author of object post is equal to currently logged user #}
+                        <small><a class="text-success" href="{% url 'update_post' post.id %}">Edytuj</a></small>
+                        <small><a class="text-danger" href="{% url 'delete_post' post.id %}">Skasuj</a></small>
+                    {% endif %}
+                    </div>
+                    <h2>{{ post.title }}</h2>
+                    <p class="article-content">{{ post.content }}</p>
+                {% endfor %}
+            </div>
+        </article>
+    </div>
+{% endblock %}

@@ -28,11 +28,4 @@ def profile(request):
     if request.method == "GET":
                 return render(request, 'users/profile.html')
 
-#
-# class Profile(View):
-#
-#     @login_required()
-#     def get(self, request):
-#
-#         return render(request, 'users/profile.html')
-#         pass
+
