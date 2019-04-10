@@ -35,9 +35,9 @@
 .div_img_review {
 	float: left;
 	width: 20%;
-	/*height: 50%;*/
+	height: 200px;
 	display: inline-block;
-	/*box-sizing: border-box;*/
+	box-sizing: border-box;
 	margin-left: auto;
 	margin-right: auto;
 }

@@ -23,9 +23,8 @@ class Register(View):
             form = UserRegisterForm()
         return render(request, 'users/registration_page.html', {'form': form})
 
+
 @login_required()
 def profile(request):
     if request.method == "GET":
-                return render(request, 'users/profile.html')
-
-
+        return render(request, 'users/profile.html')
