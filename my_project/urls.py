@@ -31,8 +31,9 @@ urlpatterns = [
     path('bud_investment', DevInvestmentBud.as_view()),
     path('dd_investment', DevInvestmentDD.as_view()),
     path('victoria_investment', DevInvestmentVictoria.as_view()),
-    path('forum', PostsListView.as_view(), name='forum'),
-    path('forum/new_post', CreatePostView.as_view(success_url='/forum'), name='create_post'),
+    path('forum/topic/<int:pk>', PostsListView.as_view(), name='forum'),
+    path('main_forum', ForumView.as_view(), name='main_forum'),
+    path('forum/new_post/<int:pk>', CreatePostView.as_view(success_url='/forum'), name='create_post'),
     path('forum/update/<int:pk>', UpdatePostView.as_view(success_url='/forum'), name='update_post'),
     path('forum/delete/<int:pk>', DeletePostView.as_view(success_url='/forum'), name='delete_post'),
 

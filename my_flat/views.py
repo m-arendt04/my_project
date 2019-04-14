@@ -3,7 +3,7 @@ from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from scraper_bs4.scrape_functions import scrape_budim, scrape_dd, scrape_victoria
-from my_flat.models import Post
+from my_flat.models import Post, Topics
 
 
 class MainPage(View):
@@ -47,17 +47,25 @@ class DevInvestmentVictoria(View):
 class ForumView(View):
 
     def get(self, request):
-        posts = {
-            'posts': Post.objects.all()
+        topics = {
+            'topics': Topics.objects.all()
         }
-        return render(request, 'my_flat/forum_view.html', posts)
+        # print(Topics.objects.get(pk=1).title)
+        return render(request, 'my_flat/main_forum_view.html', topics)
 
 
-class PostsListView(ListView):
-    model = Post
-    template_name = 'my_flat/forum_view.html'
-    context_object_name = 'posts'
-    ordering = ['date_posted']
+class PostsListView(View):
+    # model = Post
+    # template_name = 'my_flat/forum_view.html'
+    # context_object_name = 'posts'
+    # ordering = ['date_posted']
+    def get(self, request, pk):
+        posts = Post.objects.filter(topic_id=pk)
+        ctx = {
+            'posts': posts,
+            'topic_id': pk
+        }
+        return render(request, 'my_flat/forum_view.html', ctx)
 
 
 class CreatePostView(LoginRequiredMixin, CreateView):
