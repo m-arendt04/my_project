@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -20,7 +21,7 @@ class DevInvestmentBud(View):
         ctx = {
             "ctx": scrape_budim()
         }
-        return render(request, 'my_flat/dev_investment.html', ctx)
+        return render(request, 'my_flat/budimex_investment.html', ctx)
 
 
 class DevInvestmentDD(View):
@@ -43,29 +44,42 @@ class DevInvestmentVictoria(View):
         return render(request, 'my_flat/victoria_invest.html', ctx)
 
 
-# class not in use
 class ForumView(View):
-
     def get(self, request):
         topics = {
             'topics': Topics.objects.all()
         }
-        # print(Topics.objects.get(pk=1).title)
         return render(request, 'my_flat/main_forum_view.html', topics)
 
 
+class CreateNewTopic(LoginRequiredMixin, CreateView):
+    model = Topics
+    fields = ['title']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
 class PostsListView(View):
-    # model = Post
-    # template_name = 'my_flat/forum_view.html'
-    # context_object_name = 'posts'
-    # ordering = ['date_posted']
     def get(self, request, pk):
         posts = Post.objects.filter(topic_id=pk)
         ctx = {
             'posts': posts,
             'topic_id': pk
         }
-        return render(request, 'my_flat/forum_view.html', ctx)
+        return render(request, 'my_flat/topic_posts_view.html', ctx)
+
+
+# TODO change PostsListView for class specified below
+# class PostsListView(ListView):
+#     model = Post
+#     template_name = 'my_flat/topic_posts_view.html'
+#     context_object_name = 'posts'
+#     ordering = ['date_posted']
+#
+#     def get_queryset(self):
+#         return Post.objects.filter(topic_id=self.kwargs['pk'])
 
 
 class CreatePostView(LoginRequiredMixin, CreateView):
@@ -74,7 +88,11 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        form.instance.topic_id = self.kwargs['pk']
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('forum', kwargs={'pk': self.kwargs['pk']})
 
 
 class UpdatePostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # iheritance order is important
