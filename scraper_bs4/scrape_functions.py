@@ -74,7 +74,6 @@ def scrape_victoria():
         urls.append(i_url)
         i_img = posts[i].find("div")["style"]
         img_url_extracted = re.search(r"\(.*?\)", i_img).group()[1:-1]
-        print(img_url_extracted)
         image_srcs.append(img_url_extracted)
 
     return zip(urls, image_srcs, titles)

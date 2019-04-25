@@ -4,7 +4,8 @@
 
     {% for url, img_source, title  in ctx %}
         <div class="div_img_review">
-            <a href="{{ url }}" target="_blank">{{ title }}<img class="img_review" src="{{ img_source }}"></a>
+            <a href="{{ url }}" target="_blank">{{ title }}<img class="img_review" src="{{ img_source }}">
+            <br></a>
 
         </div>
     {% endfor %}

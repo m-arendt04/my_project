@@ -8,16 +8,15 @@
     <div class="content-section div_form">
         <article class="media content_section">
             <div class="media-body">
-{#            Dodaj przyciska kasowania i edytopwania tylko dla zalogowanego użytkownika#}
                 {% for topic in topics %}
                     <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ topic.author }}</a>
+                    <small class="mr-2">{{ topic.author }}</small>
                     <small class="text-muted">{{ topic.date_posted|date:"F d, Y, H:i" }}</small>
                     {% if topic.author == user %} {# If author of object post is equal to currently logged user #}
-                        <small><a class="text-danger" href="{% url 'delete_post' topic.id %}">Skasuj</a></small>
+                        <small><a class="text-danger" href="{% url 'delete_topic' topic.id %}">Skasuj</a></small>
                     {% endif %}
                     </div>
-                    <h2> <a href="{% url 'forum' topic.id %}">{{ topic.title }}</a></h2>
+                    <h2 class="alert alert-primary"> <a href="{% url 'forumTopicPosts' topic.id %}">{{ topic.title }}</a></h2>
                 {% endfor %}
             </div>
         </article>

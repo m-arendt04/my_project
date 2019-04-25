@@ -60,6 +60,22 @@ class CreateNewTopic(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse_lazy('main_forum')
+
+
+class DeleteTopicView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Topics
+
+    def test_func(self):
+        topic = self.get_object()
+        if self.request.user == topic.author:
+            return True
+        return False
+
+    def get_success_url(self):
+        return reverse_lazy('main_forum')
+
 
 class PostsListView(View):
     def get(self, request, pk):
@@ -92,7 +108,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('forum', kwargs={'pk': self.kwargs['pk']})
+        return reverse_lazy('forumTopicPosts', kwargs={'pk': self.kwargs['pk']})
 
 
 class UpdatePostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # iheritance order is important
@@ -109,6 +125,11 @@ class UpdatePostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # ih
             return True
         return False
 
+    def get_success_url(self):
+        current_post = Post.objects.get(pk=self.kwargs['pk'])
+        topic_id = current_post.topic_id
+        return reverse_lazy('forumTopicPosts', kwargs={'pk': topic_id})
+
 
 class DeletePostView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
@@ -118,3 +139,10 @@ class DeletePostView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
+
+    def get_success_url(self):
+        current_post = Post.objects.get(pk=self.kwargs['pk'])
+        topic_id = current_post.topic_id
+        return reverse_lazy('forumTopicPosts', kwargs={'pk': topic_id})
+
+

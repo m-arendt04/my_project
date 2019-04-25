@@ -10,16 +10,19 @@
             <div class="media-body">
 {#            Dodaj przyciska kasowania i edytopwania tylko dla zalogowanego użytkownika#}
                 {% for post in posts %}
-                    <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ post.author }}</a>
-                    <small class="text-muted">{{ post.date_posted|date:"F d, Y, H:i" }}</small>
-                    {% if post.author == user %} {# If author of object post is equal to currently logged user #}
-                        <small><a class="text-success" href="{% url 'update_post' post.id %}">Edytuj</a></small>
-                        <small><a class="text-danger" href="{% url 'delete_post' post.id %}">Skasuj</a></small>
-                    {% endif %}
+
+                        <div class="article-metadata">
+                        <small class="mr-2">{{ post.author }}</small>
+                        <small class="text-muted">{{ post.date_posted|date:"F d, Y, H:i" }}</small>
+                        {% if post.author == user %} {# If author of object post is equal to currently logged user #}
+                            <small><a class="text-success" href="{% url 'update_post' post.id %}">Edytuj</a></small>
+                            <small><a class="text-danger" href="{% url 'delete_post' post.id %}">Skasuj</a></small>
+                        {% endif %}
+                        </div>
+                    <div class="alert alert-dark">
+                        <p class="alert alert-primary">{{ post.title }}</p>
+                        <h2 class="article-content">{{ post.content }}</h2>
                     </div>
-                    <h2>{{ post.title }}</h2>
-                    <p class="article-content">{{ post.content }}</p>
                 {% endfor %}
             </div>
         </article>

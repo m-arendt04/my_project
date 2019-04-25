@@ -18,7 +18,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 
 from my_flat.views import MainPage, DevInvestmentBud, DevInvestmentDD, DevInvestmentVictoria, ForumView, PostsListView, \
-    CreatePostView, UpdatePostView, DeletePostView, CreateNewTopic
+    CreatePostView, UpdatePostView, DeletePostView, CreateNewTopic, DeleteTopicView
 from users import views as user_views
 
 urlpatterns = [
@@ -31,12 +31,13 @@ urlpatterns = [
     path('bud_investment', DevInvestmentBud.as_view()),
     path('dd_investment', DevInvestmentDD.as_view()),
     path('victoria_investment', DevInvestmentVictoria.as_view()),
-    path('forum/topic/<int:pk>', PostsListView.as_view(), name='forum'),
-    path('forum', ForumView.as_view(), name='main_forum'),
-    path('forum/new_topic', CreateNewTopic.as_view(success_url='/main_forum'), name='new_topic'),
+    path('forum/topic/<int:pk>', PostsListView.as_view(), name='forumTopicPosts'),
+    path('forum/', ForumView.as_view(), name='main_forum'),
+    path('forum/new_topic', CreateNewTopic.as_view(), name='new_topic'),
     path('forum/new_post/<int:pk>', CreatePostView.as_view(), name='create_post'),
-    path('forum/update/<int:pk>', UpdatePostView.as_view(success_url='/forum'), name='update_post'),
-    path('forum/delete/<int:pk>', DeletePostView.as_view(success_url='/forum'), name='delete_post'),
+    path('forum/update/<int:pk>', UpdatePostView.as_view(), name='update_post'),
+    path('forum/delete/<int:pk>', DeletePostView.as_view(), name='delete_post'),
+    path('forum/delete_topic/<int:pk>', DeleteTopicView.as_view(), name='delete_topic'),
 
 
 ]
