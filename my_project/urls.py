@@ -31,13 +31,13 @@ urlpatterns = [
     path('bud_investment', DevInvestmentBud.as_view()),
     path('dd_investment', DevInvestmentDD.as_view()),
     path('victoria_investment', DevInvestmentVictoria.as_view()),
-    path('forum/topic/<int:pk>', PostsListView.as_view(), name='forumTopicPosts'),
-    path('forum/', ForumView.as_view(), name='main_forum'),
-    path('forum/new_topic', CreateNewTopic.as_view(), name='new_topic'),
-    path('forum/new_post/<int:pk>', CreatePostView.as_view(), name='create_post'),
-    path('forum/update/<int:pk>', UpdatePostView.as_view(), name='update_post'),
-    path('forum/delete/<int:pk>', DeletePostView.as_view(), name='delete_post'),
-    path('forum/delete_topic/<int:pk>', DeleteTopicView.as_view(), name='delete_topic'),
+    path('forum/topic/<int:pk>/', PostsListView.as_view(), name='forum-topic-posts'),
+    path('forum/', ForumView.as_view(), name='main-forum'),
+    path('forum/new_topic/', CreateNewTopic.as_view(), name='new-topic'),
+    path('forum/new_post/<int:pk>', CreatePostView.as_view(), name='create-post'),
+    path('forum/update/<int:pk>', UpdatePostView.as_view(), name='update-post'),
+    path('forum/delete/<int:pk>', DeletePostView.as_view(), name='delete-post'),
+    path('forum/delete_topic/<int:pk>', DeleteTopicView.as_view(), name='delete-topic'),
 
 
 ]

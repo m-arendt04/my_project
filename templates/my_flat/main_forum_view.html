@@ -5,20 +5,40 @@
         <h2>{{ user.username }}</h2>
         <a href="/forum/new_topic">Nowy wątek</a>
     </div>
-    <div class="content-section div_form">
-        <article class="media content_section">
-            <div class="media-body">
-                {% for topic in topics %}
-                    <div class="article-metadata">
-                    <small class="mr-2">{{ topic.author }}</small>
-                    <small class="text-muted">{{ topic.date_posted|date:"F d, Y, H:i" }}</small>
-                    {% if topic.author == user %} {# If author of object post is equal to currently logged user #}
-                        <small><a class="text-danger" href="{% url 'delete_topic' topic.id %}">Skasuj</a></small>
-                    {% endif %}
-                    </div>
-                    <h2 class="alert alert-primary"> <a href="{% url 'forumTopicPosts' topic.id %}">{{ topic.title }}</a></h2>
-                {% endfor %}
-            </div>
-        </article>
-    </div>
+    {% if topics %}
+        <div class="content-section div_form">
+            <article class="media content_section">
+                <div class="media-body">
+                    {% for topic in topics %}
+                        <div class="article-metadata">
+                        <small class="mr-2">{{ topic.author }}</small>
+                        <small class="text-muted">{{ topic.date_posted|date:"F d, Y, H:i" }}</small>
+                        {% if topic.author == user %} {# If author of object post is equal to currently logged user #}
+                            <small><a class="text-danger" href="{% url 'delete-topic' topic.id %}">Skasuj</a></small>
+                        {% endif %}
+                        </div>
+                        <h2 class="alert alert-primary"> <a href="{% url 'forum-topic-posts' topic.id %}">{{ topic.title }}</a></h2>
+                    {% endfor %}
+                </div>
+            </article>
+        </div>
+        {% if is_paginated %}
+        <div class="content-section div_form">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="/forum/?page={{ page_obj.previous_page_number }}"
+                       class="btn btn-outline-info">poprzedni</a>
+                {% endif %}
+                <span class="page-current" class="btn btn-outline-info">
+                    Strona {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/forum/?page={{ page_obj.next_page_number }}" class="btn btn-outline-info">następny</a>
+                {% endif %}
+            </span>
+        </div>
+        {% endif %}
+    {% else %}
+        <h3>Brak wątków</h3>
+    {% endif %}
 {% endblock %}

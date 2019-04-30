@@ -5,18 +5,18 @@
         <h2>{{ user.username }}</h2>
         <a href="/forum/new_post/{{ topic_id }}">Nowy post</a>
     </div>
+    {% if posts %}
     <div class="content-section div_form">
         <article class="media content_section">
             <div class="media-body">
-{#            Dodaj przyciska kasowania i edytopwania tylko dla zalogowanego użytkownika#}
                 {% for post in posts %}
 
                         <div class="article-metadata">
                         <small class="mr-2">{{ post.author }}</small>
                         <small class="text-muted">{{ post.date_posted|date:"F d, Y, H:i" }}</small>
                         {% if post.author == user %} {# If author of object post is equal to currently logged user #}
-                            <small><a class="text-success" href="{% url 'update_post' post.id %}">Edytuj</a></small>
-                            <small><a class="text-danger" href="{% url 'delete_post' post.id %}">Skasuj</a></small>
+                            <small><a class="text-success" href="{% url 'update-post' post.id %}">Edytuj</a></small>
+                            <small><a class="text-danger" href="{% url 'delete-post' post.id %}">Skasuj</a></small>
                         {% endif %}
                         </div>
                     <div class="alert alert-dark">
@@ -27,4 +27,24 @@
             </div>
         </article>
     </div>
+        {% if is_paginated %}
+            <div class="content-section div_form">
+                <span class="page-links">
+                    {% if page_obj.has_previous %}
+                        <a href="/forum/topic/{{ topic_id }}/?page={{ page_obj.previous_page_number }}"
+                           class="btn btn-outline-info">poprzedni</a>
+                    {% endif %}
+                    <span class="page-current" class="btn btn-outline-info">
+                        Strona {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="/forum/topic/{{ topic_id }}/?page={{ page_obj.next_page_number }}"
+                           class="btn btn-outline-info">następny</a>
+                    {% endif %}
+                </span>
+            </div>
+            {% endif %}
+        {% else %}
+            <h3 class="content-section div_form"> Brak postów, podziel się z nami opinią.</h3>
+    {% endif %}
 {% endblock %}

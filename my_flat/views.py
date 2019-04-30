@@ -13,7 +13,7 @@ class MainPage(View):
         return render(request, 'my_flat/main_page.html')
 
 
-# Think about how to split this three functions into one.
+# Think about how to link this three functions into one.
 class DevInvestmentBud(View):
     def get(self, request):
         scrape_budim()
@@ -41,12 +41,12 @@ class DevInvestmentVictoria(View):
         return render(request, 'my_flat/victoria_invest.html', ctx)
 
 
-class ForumView(View):
-    def get(self, request):
-        topics = {
-            'topics': Topics.objects.all()
-        }
-        return render(request, 'my_flat/main_forum_view.html', topics)
+class ForumView(ListView):
+    model = Topics
+    template_name = 'my_flat/main_forum_view.html'
+    context_object_name = 'topics'
+    ordering = ['date_posted']
+    paginate_by = 5
 
 
 class CreateNewTopic(LoginRequiredMixin, CreateView):
@@ -58,7 +58,7 @@ class CreateNewTopic(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('main_forum')
+        return reverse_lazy('main-forum')
 
 
 class DeleteTopicView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -71,28 +71,22 @@ class DeleteTopicView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
     def get_success_url(self):
-        return reverse_lazy('main_forum')
+        return reverse_lazy('main-forum')
 
 
-class PostsListView(View):
-    def get(self, request, pk):
-        posts = Post.objects.filter(topic_id=pk)
-        ctx = {
-            'posts': posts,
-            'topic_id': pk
-        }
-        return render(request, 'my_flat/topic_posts_view.html', ctx)
+class PostsListView(ListView):
+    model = Post
+    template_name = 'my_flat/topic_posts_view.html'
+    context_object_name = 'posts'
+    paginate_by = 10
 
+    def get_queryset(self):
+        return Post.objects.filter(topic_id=self.kwargs['pk']).order_by('date_posted')
 
-# TODO change PostsListView for class specified below
-# class PostsListView(ListView):
-#     model = Post
-#     template_name = 'my_flat/topic_posts_view.html'
-#     context_object_name = 'posts'
-#     ordering = ['date_posted']
-#
-#     def get_queryset(self):
-#         return Post.objects.filter(topic_id=self.kwargs['pk'])
+    def get_context_data(self, **kwargs):
+        context = super(PostsListView, self).get_context_data(**kwargs)
+        context['topic_id'] = self.kwargs['pk']
+        return context
 
 
 class CreatePostView(LoginRequiredMixin, CreateView):
@@ -105,7 +99,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('forumTopicPosts', kwargs={'pk': self.kwargs['pk']})
+        return reverse_lazy('forum-topic-posts', kwargs={'pk': self.kwargs['pk']})
 
 
 class UpdatePostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # iheritance order is important
@@ -125,7 +119,7 @@ class UpdatePostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # ih
     def get_success_url(self):
         current_post = Post.objects.get(pk=self.kwargs['pk'])
         topic_id = current_post.topic_id
-        return reverse_lazy('forumTopicPosts', kwargs={'pk': topic_id})
+        return reverse_lazy('forum-topic-posts', kwargs={'pk': topic_id})
 
 
 class DeletePostView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -140,6 +134,4 @@ class DeletePostView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def get_success_url(self):
         current_post = Post.objects.get(pk=self.kwargs['pk'])
         topic_id = current_post.topic_id
-        return reverse_lazy('forumTopicPosts', kwargs={'pk': topic_id})
-
-
+        return reverse_lazy('forum-topic-posts', kwargs={'pk': topic_id})
