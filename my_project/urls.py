@@ -22,7 +22,7 @@ from my_flat.views import MainPage, DevInvestmentBud, DevInvestmentDD, DevInvest
 from users import views as user_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin_site'),
     path('register/', user_views.Register.as_view(), name='register'),
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login_page.html'), name='login'),

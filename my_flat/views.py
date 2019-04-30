@@ -1,21 +1,20 @@
-from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from scraper_bs4.scrape_functions import scrape_budim, scrape_dd, scrape_victoria
+
 from my_flat.models import Post, Topics
 
 
 class MainPage(View):
-
     def get(self, request):
         return render(request, 'my_flat/main_page.html')
 
 
 # Think about how to split this three functions into one.
 class DevInvestmentBud(View):
-
     def get(self, request):
         scrape_budim()
         ctx = {
@@ -25,7 +24,6 @@ class DevInvestmentBud(View):
 
 
 class DevInvestmentDD(View):
-
     def get(self, request):
         scrape_dd()
         ctx = {
@@ -35,7 +33,6 @@ class DevInvestmentDD(View):
 
 
 class DevInvestmentVictoria(View):
-
     def get(self, request):
         scrape_victoria()
         ctx = {
