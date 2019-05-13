@@ -25,7 +25,7 @@ SECRET_KEY = '^br0q)mt4=6@%%*wa(2dj%&46iejni!-t0o%u*v=6ke&c@*s7m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['marek.localhost.run', 'https://marek.localhost.run', '127.0.0.1']
 
 
 # Application definition
@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'my_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 
 # Password validation
@@ -133,10 +133,3 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-
-try:
-    from my_project.local_settings import DATABASES
-except ModuleNotFoundError:
-    print("Brak konfiguracji bazy danych w pliku local_settings.py!")
-    print("Uzupełnij dane i spróbuj ponownie!")
-    exit(0)

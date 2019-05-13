@@ -48,8 +48,9 @@ def scrape_dd():
         titles.append(investment_title)
         i_url = element.find("a")["href"]
         urls.append(i_url)
-        i_img = element.find("img")["src"]
+        i_img = element.find("img")["data-src"]
         image_srcs.append(i_img)
+
 
     return zip(urls, image_srcs, titles)
 

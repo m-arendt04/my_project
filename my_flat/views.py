@@ -135,3 +135,4 @@ class DeletePostView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         current_post = Post.objects.get(pk=self.kwargs['pk'])
         topic_id = current_post.topic_id
         return reverse_lazy('forum-topic-posts', kwargs={'pk': topic_id})
+
