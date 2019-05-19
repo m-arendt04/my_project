@@ -2,10 +2,11 @@
 {% load static %}
 {% block content %}
 
-    {% for url, img_source, title  in ctx %}
+    {% for info_invest  in all_investments %}
         <div class="div_img_review">
-            <a href="{{ url }}" target="_blank"><img class="img_review" src="{{ img_source }}">
-            <br>{{ title }}</a>
+            <a href="{{ info_invest.invest_url }}" target="_blank">
+                <img class="img_review" src="{{ info_invest.invest_img_src }}">
+            <br>{{ info_invest.invest_name }}</a>
         </div>
     {% endfor %}
 
