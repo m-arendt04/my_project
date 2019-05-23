@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'scraper_bs4',
     'django_celery_beat',
-    'django_celery_results'
+    'django_celery_results',
+    'renovation_costs',
+    
 ]
 
 MIDDLEWARE = [

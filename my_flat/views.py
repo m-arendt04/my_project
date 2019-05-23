@@ -14,7 +14,6 @@ class MainPage(View):
         return render(request, 'my_flat/main_page.html')
 
 
-# Think about how to link this three functions into one.
 class DevInvestmentBud(View):
     def get(self, request):
         all_investments = BudimexInfo.objects.all()
