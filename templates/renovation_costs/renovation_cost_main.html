@@ -2,5 +2,16 @@
 {% load static %}
 
 {% block content %}
-    <h1>Wybierz kategorie</h1>
+
+    <div class="content-section div_form ">
+        <h1 class="rounded p-3 mb-2 bg-warning text-dark text-center" >Wybierz kategorie</h1>
+        <a href="{% url 'painting-cost' %}"><button type="button" class="btn btn-primary btn-lg btn-block">
+            Malowanie</button></a>
+        <a><button type="button" class="btn btn-primary btn-lg btn-block">Tapetowanie</button></a>
+        <a><button type="button" class="btn btn-primary btn-lg btn-block">Glazura</button></a>
+        <a><button type="button" class="btn btn-primary btn-lg btn-block">Biały montaż</button></a>
+        <a><button type="button" class="btn btn-primary btn-lg btn-block">Żaluzje/Rolety/Zasłony</button></a>
+        <a><button type="button" class="btn btn-primary btn-lg btn-block">Kuchnia</button></a>
+        <a><button type="button" class="btn btn-primary btn-lg btn-block">Urządzenia elektryczne</button></a>
+    </div>
 {% endblock %}

@@ -3,9 +3,11 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from scraper_bs4.scrape_functions import scrape_budim, scrape_dd, scrape_victoria
 
 from my_flat.models import Post, Topics
+from scraper_bs4.scrape_functions import scrape_victoria # funkcja pozostawiona celowo, w celu pokazania różnicy
+                                                            #szybości zwracania wyników scrapowania na bieżąco
+#                                                            a pobieranych z bazy danych
 from scraper_bs4.models import BudimexInfo, DomDevelopmentInfo
 
 

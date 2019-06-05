@@ -34,13 +34,10 @@
 
 .div_img_review {
 	float: left;
-	width: 20%;
-	/*height: 200px;*/
+	width: 25%;
+	height: 200px;
 	display: inline-block;
-	/*box-sizing: border-box;*/
-	/*margin-left: auto;*/
-	/*margin-right: auto;*/
-	/*margin-bottom: auto;*/
+	box-sizing: border-box;
 	margin: auto;
 }
 
@@ -50,9 +47,9 @@
 
 .img_review {
 	width: 100%;
-	border: 2px;
     border-radius: 30px;
     padding: 5px;
+	height: 150px;
 
 }
 
@@ -67,4 +64,15 @@
     padding-left:0;
     float: left;
     display: inline-block;
+}
+
+
+.float {
+	float: inside;
+}
+
+.calc_position {
+	position: absolute;
+	top: 0px;
+	right: 0px;
 }
