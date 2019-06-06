@@ -72,7 +72,7 @@
 }
 
 .calc_position {
-	position: absolute;
+	position: sticky;
 	top: 0px;
 	right: 0px;
 }

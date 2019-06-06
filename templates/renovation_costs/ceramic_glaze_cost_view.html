@@ -5,7 +5,7 @@
 
 {% block content %}
     <div class="content-section div_form">
-        <h1 class="rounded p-3 mb-2 bg-warning text-dark text-center" >Malowanie</h1>
+        <h1 class="rounded p-3 mb-2 bg-warning text-dark text-center" >Układanie glazury</h1>
         <form method="post">
             {% csrf_token %}
             {{ form|crispy }}
@@ -13,9 +13,14 @@
         </form>
     </div>
     <div class="calc_position" style="width: 25%">
-    <h2>Skorzystaj z kalkulatora powierzchni otworów</h2>
-            {{ form_slot_size|crispy }}
+    <h2>Skorzystaj z kalkulatora powierzchni otwórów</h2>
+            {{ form_slot_calc|crispy }}
             <button type="button" id="count">Dolicz otwór</button><br>
+    </div>
+    <div class="calc_position" style="width: 25%">
+    <h2>Skorzystaj z kalkulatora powierzchni podłóg</h2>
+            {{ form_floor_tiles_area|crispy }}
+            <button type="button" id="count_area">Dolicz powierzchnie</button><br>
     </div>
     <script src="../../static/js/calculator.js" type="text/javascript"></script>
 {% endblock %}

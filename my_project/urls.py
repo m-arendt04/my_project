@@ -41,6 +41,11 @@ urlpatterns = [
     path('forum/delete_topic/<int:pk>', my_flat_views.DeleteTopicView.as_view(), name='delete-topic'),
     path('renovation_cost', ren_costs_views.RenovationCategoriesView.as_view(), name='renovation-cost'),
     path('renovation_cost/painting', ren_costs_views.PaintingCostView.as_view(), name='painting-cost'),
+    path('renovation_cost/paperhanging', ren_costs_views.WallpaperCostView.as_view(), name='wallpaper-cost'),
+    path('renovation_cost/ceramic_glaze', ren_costs_views.CeramicGlazeCostView.as_view(), name='ceramicGlaze-cost'),
+
+
+
 
 
 ]
