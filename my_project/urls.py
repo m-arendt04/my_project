@@ -43,6 +43,8 @@ urlpatterns = [
     path('renovation_cost/painting', ren_costs_views.PaintingCostView.as_view(), name='painting-cost'),
     path('renovation_cost/paperhanging', ren_costs_views.WallpaperCostView.as_view(), name='wallpaper-cost'),
     path('renovation_cost/ceramic_glaze', ren_costs_views.CeramicGlazeCostView.as_view(), name='ceramicGlaze-cost'),
+    path('renovation_cost/plaster', ren_costs_views.PlasterCostView.as_view(), name='plaster-cost'),
+    path('renovation_cost/floor_panel', ren_costs_views.FloorPanelCostView.as_view(), name='floor-panel-cost'),
 
 
 

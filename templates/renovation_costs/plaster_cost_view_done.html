@@ -1,0 +1,15 @@
+{% extends 'my_flat/index.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block content %}
+    <div class="content-section div_form float">
+        <h2>Gładź - {{ chosen_plaster.name }} :</h2>
+            <p>{{ costs_of_plaster }} zł</p>
+        <h2>Grunt - {{ chosen_base.name }} :</h2>
+            <p>{{ costs_of_base }} zł</p>
+    <a href="{% url 'renovation-cost' %}" class="btn btn-outline-success my-2 my-sm-0">Wróc do kategorii</a>
+    </div>
+
+{% endblock %}

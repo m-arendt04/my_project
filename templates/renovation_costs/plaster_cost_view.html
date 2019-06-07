@@ -1,0 +1,21 @@
+{% extends 'my_flat/index.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block content %}
+    <div class="content-section div_form">
+        <h1 class="rounded p-3 mb-2 bg-warning text-dark text-center" >Gładziowanie ścian</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="Policz">
+        </form>
+    </div>
+    <div class="calc_position" style="width: 25%">
+    <h2>Skorzystaj z kalkulatora powierzchni otworów</h2>
+            {{ form_slot_calc|crispy }}
+            <button type="button" id="count">Dolicz otwór</button><br>
+    </div>
+    <script src="../../static/js/calculator.js" type="text/javascript"></script>
+{% endblock %}

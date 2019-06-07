@@ -1,0 +1,19 @@
+{% extends 'my_flat/index.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block content %}
+    <div class="content-section div_form float">
+        <h2>Płytki ścienne - {{ products.wall_tiles.name }} :</h2>
+            <p>{{ wall_tiles_result }} zł</p>
+        <h2>Płytki podłogowe - {{ products.floor_tiles.name }} :</h2>
+            <p>{{ floor_tiles_result }} zł</p>
+        <h2>Fuga - {{ products.fugue.name }} :</h2>
+            <p>{{ fugue_result }} zł</p>
+        <h2>Silicone - {{ products.silicone.name }} :</h2>
+            <p>{{ silicone_result }} zł</p>
+        <a href="{% url 'renovation-cost' %}" class="btn btn-outline-success my-2 my-sm-0">Wróc do kategorii</a>
+    </div>
+
+{% endblock %}
