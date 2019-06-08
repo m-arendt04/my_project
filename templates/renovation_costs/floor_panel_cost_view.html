@@ -4,12 +4,14 @@
 {% load static %}
 
 {% block content %}
-    <div class="content-section div_form float">
-        <h1 class="rounded p-3 mb-2 bg-warning text-dark text-center" >Panele podłogowe</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <input type="submit" value="Policz">
-        </form>
+    <div class="content-section div_form">
+            <div>
+                <h1 class="rounded p-3 mb-2 bg-warning text-dark text-center" >Panele podłogowe</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input type="submit" value="Policz">
+                </form>
+            </div>
     </div>
 {% endblock %}

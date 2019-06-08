@@ -3,18 +3,22 @@ import renovation_costs.choicefields as choices
 
 
 class PaintingCostForm(forms.Form):
-    running_metre = forms.DecimalField(label='Metry bieżące malowania [m]', min_value=0.01)
+    running_metre = forms.DecimalField(label='Metry bieżące malowania [m]', min_value=0.01,
+                                       help_text='Suma długości ścian do pomalowania')
     flat_height = forms.DecimalField(label='Wysokość mieszkania [m]', min_value=2.5)
     ceiling_area = forms.DecimalField(label='Powierzchnia sufitów [m2]', min_value=0.1)
-    slot_area = forms.DecimalField(label='Powierzchnia otworów [m2]', min_value=0.1, initial=0)
+    slot_area = forms.DecimalField(label='Powierzchnia otworów [m2]', min_value=0.1, initial=0,
+                                   help_text='Suma powierzchni okien i drzwi')
     paints = forms.ChoiceField(label='Farba', choices=choices.paints)
     base = forms.ChoiceField(label='Grunt', choices=choices.bases)
 
 
 class WallpaperCostForm(forms.Form):
-    running_metre = forms.DecimalField(label='Metry bieżące tapetowania [m]', min_value=0.01)
+    running_metre = forms.DecimalField(label='Metry bieżące tapetowania [m]', min_value=0.01,
+                                       help_text='Suma długości ścian do pomalowania')
     flat_height = forms.DecimalField(label='Wysokość mieszkania [m]', min_value=2.5)
-    slot_area = forms.DecimalField(label='Powierzchnia otworów [m2]', min_value=0.1, initial=0)
+    slot_area = forms.DecimalField(label='Powierzchnia otworów [m2]', min_value=0.1, initial=0,
+                                   help_text='Suma powierzchni okien i drzwi')
     wallpaper = forms.ChoiceField(label='Tapeta', choices=choices.wallpaper)
     glue = forms.ChoiceField(label='Klej do tapet', choices=choices.wallpaper_glue)
 
@@ -30,10 +34,12 @@ class AreaSizeCalc(forms.Form):
 
 
 class CeramicGlazeCostForm(forms.Form):
-    wall_running_metre = forms.DecimalField(label='Metry bieżące śćian [m]', decimal_places=2)
+    wall_running_metre = forms.DecimalField(label='Metry bieżące śćian [m]', decimal_places=2,
+                                            help_text='Suma długości ścian do pomalowania')
     wall_height = forms.DecimalField(label='Wysokość powierzchni pod glazurę [m]', decimal_places=2)
     floor_area = forms.DecimalField(label='Powierzchnia podłogi [m2]', decimal_places=2, initial=0)
-    slot_area = forms.DecimalField(label='Powierzchnia otworów [m2]', decimal_places=2, initial=0)
+    slot_area = forms.DecimalField(label='Powierzchnia otworów [m2]', decimal_places=2, initial=0,
+                                   help_text='Suma powierzchni okien i drzwi')
     wall_tiles = forms.ChoiceField(label='Płytki ścienne', choices=choices.wall_tiles)
     floor_tiles = forms.ChoiceField(label='Płytki podłogowe', choices=choices.floor_tiles)
     fugue = forms.ChoiceField(label='Fuga', choices=choices.fugue)
@@ -45,11 +51,13 @@ class CeramicGlazeCostForm(forms.Form):
 
 
 class PlasterCostForm(forms.Form):
-    running_metre = forms.DecimalField(label='Metry bieżące szpachlowania [m]', min_value=0.01)
+    running_metre = forms.DecimalField(label='Metry bieżące szpachlowania [m]', min_value=0.01,
+                                       help_text='Suma długości ścian do pomalowania')
     flat_height = forms.DecimalField(label='Wysokość mieszkania [m]', min_value=2.5)
     ceiling_area = forms.DecimalField(label='Powierzchnia sufitów [m2]', min_value=0.1)
-    slot_area = forms.DecimalField(label='Powierzchnia otworów [m2]', min_value=0.1, initial=0)
-    layers_of_plaster = forms.ChoiceField(label='Krotność szpachlowania', choices=choices.layers_of_plaster)
+    slot_area = forms.DecimalField(label='Powierzchnia otworów [m2]', min_value=0.1, initial=0,
+                                   help_text='Suma powierzchni okien i drzwi')
+    layers_of_plaster = forms.ChoiceField(label='Ile razy chcesz szpachlować ?', choices=choices.layers_of_plaster)
     plaster = forms.ChoiceField(label='Gładź szpachlowa', choices=choices.plaster)
     base = forms.ChoiceField(label='Grunt budowlany', choices=choices.plaster_base)
 

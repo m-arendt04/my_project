@@ -66,13 +66,7 @@
     display: inline-block;
 }
 
-
-.float {
-	float: inside;
-}
-
 .calc_position {
-	position: sticky;
-	top: 0px;
-	right: 0px;
+	width: 25%;
+	float: right;
 }

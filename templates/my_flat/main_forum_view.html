@@ -1,12 +1,18 @@
 {% extends "my_flat/index.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+
     <div>
         <h2>{{ user.username }}</h2>
         <a href="/forum/new_topic">Nowy wątek</a>
     </div>
+    <div class="container">
+        <h1 class="rounded p-3 mb-2 bg-info text-dark text-center" >
+                Podziel się z nami opinią, nawiąż konwersację, zapytaj o coś ;)
+        </h1>
+    </div>
     {% if topics %}
-        <div class="content-section div_form">
+        <div class="container">
             <article class="media content_section">
                 <div class="media-body">
                     {% for topic in topics %}

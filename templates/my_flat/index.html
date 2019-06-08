@@ -11,7 +11,7 @@
     <nav class="navbar navbar-dark bg-dark justify-content-between">
         <a href="/" class="navbar-brand">STRONA GŁÓWNA</a>
         <a href="{% url 'main-forum' %}" class="navbar-brand">FORUM</a>
-        <a href="{% url 'renovation-cost' %}" class="navbar-brand">KOSZTORYSUJ REMONT</a>
+        <a href="{% url 'renovation-cost' %}" class="navbar-brand">POLICZ KOSZTY MATERIAŁÓW BUDOWLANYCH</a>
         <div class="form-inline">
             {% if user.is_superuser %}
                 <a href="/admin/" class="btn btn-outline-warning my-2 my-sm-0">Panel administratora</a>
