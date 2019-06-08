@@ -23,7 +23,6 @@ class PaintingCostView(View):
         }
         return render(request, 'renovation_costs/painting_cost_view.html', ctx)
 
-    #
     def post(self, request):
         form = PaintingCostForm(request.POST)
         if form.is_valid():
