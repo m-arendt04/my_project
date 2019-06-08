@@ -60,4 +60,4 @@ class FloorPanelCostForm(forms.Form):
     board = forms.ChoiceField(label='Listwa przypodłogowa', choices=choices.board)
     floor_panel = forms.ChoiceField(label='Panel podłogowy', choices=choices.floor_panels)
     floor_panel_bed = forms.ChoiceField(label='Podkład pod panele', choices=choices.floor_panel_bed)
-    foil = forms.ChoiceField(choices=choices.foil, widget=forms.HiddenInput())
+    foil = forms.ChoiceField(label='Folia izolacyjna', choices=choices.foil)

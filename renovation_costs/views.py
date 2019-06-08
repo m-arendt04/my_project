@@ -5,7 +5,6 @@ from django.views import View
 
 from renovation_costs.forms import PaintingCostForm, SlotSizeCalc, WallpaperCostForm, CeramicGlazeCostForm, \
     AreaSizeCalc, PlasterCostForm, FloorPanelCostForm
-# from renovation_costs.models import Paint, Base, Wallpaper, WallpaperGlue
 from renovation_costs.models import Product
 
 
@@ -124,22 +123,22 @@ class CeramicGlazeCostView(View):
 
             wall_tiles_result = math.ceil(
                 ceramic_glaze_area_walls / chosen_wall_tiles.usage_per_unit
-                ) * chosen_wall_tiles.price
+            ) * chosen_wall_tiles.price
             floor_tiles_result = math.ceil(
                 ceramic_glaze_area_floor / chosen_floor_tiles.usage_per_unit
-                ) * chosen_floor_tiles.price
+            ) * chosen_floor_tiles.price
             fugue_result = math.ceil(
                 (ceramic_glaze_area_floor + ceramic_glaze_area_walls) / chosen_fugue.usage_per_unit
-                ) * chosen_fugue.price
+            ) * chosen_fugue.price
             silicone_result = math.ceil(
                 silicone_running_metre / chosen_silicone.usage_per_unit
-                ) * chosen_silicone.price
+            ) * chosen_silicone.price
 
             ctx = {
-                'wall_tiles_result': round(wall_tiles_result,2),
-                'floor_tiles_result': round(floor_tiles_result,2),
-                'fugue_result': round(fugue_result,2),
-                'silicone_result': round(silicone_result,2),
+                'wall_tiles_result': round(wall_tiles_result, 2),
+                'floor_tiles_result': round(floor_tiles_result, 2),
+                'fugue_result': round(fugue_result, 2),
+                'silicone_result': round(silicone_result, 2),
                 'products': {
                     'floor_tiles': chosen_floor_tiles,
                     'wall_tiles': chosen_wall_tiles,
@@ -156,7 +155,6 @@ class PlasterCostView(View):
         form = PlasterCostForm()
         form_calc_1 = SlotSizeCalc()
 
-
         ctx = {
             'form': form,
             'form_slot_calc': form_calc_1,
@@ -172,21 +170,19 @@ class PlasterCostView(View):
             slot_area = form.cleaned_data['slot_area']
             ceiling_area = form.cleaned_data['ceiling_area']
             layers_of_plaster = int(form.cleaned_data['layers_of_plaster'])
-            print(type(layers_of_plaster))
             plaster = form.cleaned_data['plaster']
             base = form.cleaned_data['base']
 
             plaster_area = running_metre * flat_height + ceiling_area - slot_area
-            print(type(plaster_area))
             chosen_plaster = Product.objects.get(pk=plaster)
             chosen_base = Product.objects.get(pk=base)
 
             result_of_plaster = math.ceil(
                 plaster_area * layers_of_plaster / chosen_plaster.usage_per_unit
-                ) * chosen_plaster.price
+            ) * chosen_plaster.price
             result_of_base = math.ceil(
                 plaster_area / chosen_base.usage_per_unit
-                ) * chosen_base.price
+            ) * chosen_base.price
 
             ctx = {
                 'costs_of_plaster': round(result_of_plaster, 2),
@@ -219,7 +215,7 @@ class FloorPanelCostView(View):
             chosen_board = Product.objects.get(pk=board)
             floor_panel_result = floor_area * (
                     chosen_floor_panel.price + chosen_floor_panel_bed.price + chosen_foil.price
-                    )
+            )
             board_result = math.ceil(room_circuit / chosen_board.usage_per_unit) * chosen_board.price
 
             ctx = {
